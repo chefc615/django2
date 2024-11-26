@@ -1,0 +1,100 @@
+<!-- hello/templates/hello/recipe_detail.html -->
+
+{% extends 'hello/base.html' %}
+
+{% block title %}{{ recipe.title }} - My Recipe Site{% endblock %}
+
+{% block content %}
+<div class="recipe-detail">
+    <h1 class="mb-4">{{ recipe.title }}</h1>
+    <div class="row">
+        <div class="col-md-6">
+            {% if recipe.image %}
+                <img src="{{ recipe.image }}" class="img-fluid mb-3" alt="{{ recipe.title }}" style="width: 100%; height: 400px; object-fit: cover;">
+            {% else %}
+                <div class="bg-secondary text-white d-flex align-items-center justify-content-center" style="width: 100%; height: 400px;">
+                    <span>No Image Available</span>
+                </div>
+            {% endif %}
+        </div>
+        <div class="col-md-6">
+            <p><strong>Total Time:</strong> {{ recipe.total_time }}</p>
+            <p><strong>Yields:</strong> {{ recipe.yields }}</p>
+        </div>
+    </div>
+
+    <ul class="nav nav-tabs mt-4" id="recipeTab" role="tablist">
+        <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="overview-tab" data-bs-toggle="tab" data-bs-target="#overview" type="button" role="tab" aria-controls="overview" aria-selected="true">Ingredients</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="details-tab" data-bs-toggle="tab" data-bs-target="#details" type="button" role="tab" aria-controls="details" aria-selected="false">Instructions</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="grams-tab" data-bs-toggle="tab" data-bs-target="#grams" type="button" role="tab" aria-controls="grams" aria-selected="false">Grams</button>
+        </li>
+    </ul>
+
+    <div class="tab-content mt-3" id="recipeTabContent">
+        <div class="tab-pane fade show active" id="overview" role="tabpanel" aria-labelledby="overview-tab">
+            <h2>Ingredients</h2>
+            {% if ingredient_groups %}
+                {% for group in ingredient_groups %}
+                    <h3>{{ group.purpose }}</h3>
+                    <ul>
+                        {% for ingredient in group.ingredients %}
+                            <li>{{ ingredient }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endfor %}
+            {% else %}
+                <p>No ingredient groups found.</p>
+            {% endif %}
+        </div>
+        <div class="tab-pane fade" id="details" role="tabpanel" aria-labelledby="details-tab">
+            <h2>Instructions List</h2>
+            {% if instructions_list %}
+                <ol>
+                    {% for instruction in instructions_list %}
+                        <li>{{ instruction }}</li>
+                    {% endfor %}
+                </ol>
+            {% else %}
+                <p>No instructions list found.</p>
+            {% endif %}
+            
+            <h2>Equipment</h2>
+            {% if equipment %}
+                <ul>
+                    {% for item in equipment %}
+                        <li>{{ item }}</li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>No equipment information available.</p>
+            {% endif %}
+
+            <h2>Keywords</h2>
+            {% if keywords %}
+                <p>{{ keywords|join:", " }}</p>
+            {% else %}
+                <p>No keywords available.</p>
+            {% endif %}
+        </div>
+        <div class="tab-pane fade" id="grams" role="tabpanel" aria-labelledby="grams-tab">
+            <h2>QTY</h2>
+            {% if recipe_ingredients %}
+                <ol>
+                    {% for ingredient in recipe_ingredients %}
+                        <li>{{ ingredient.grams }} {{ingredient.metric_measurement}} {{ ingredient.type }} </li>
+                    {% endfor %}
+                </ol>
+            {% else %}
+                <p>No ingredients found.</p>
+            {% endif %}
+        </div>
+    </div>
+
+    <a href="{% url 'index' %}" class="btn btn-secondary mt-3">Back to all recipes</a>
+</div>
+{% endblock %}

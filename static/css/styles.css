@@ -1,0 +1,18 @@
+/* static/css/styles.css */
+
+body {
+    font-family: 'Roboto', sans-serif;
+}
+.fixed-size {
+    width: 300px; /* or a specific width like 300px */
+    height: 200px; /* set a fixed height */
+    object-fit: cover; /* ensures the image covers the area without distortion */
+}
+.footer {
+    background-color: #343a40;
+    color: white;
+}
+
+.navbar-brand img {
+    margin-right: 10px;
+}

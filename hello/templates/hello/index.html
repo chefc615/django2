@@ -1,0 +1,46 @@
+{% extends 'hello/base.html' %}
+
+{% block title %}
+    {% if search %}
+        Search Results - {{ query }}
+    {% else %}
+        All Recipes - My Recipe Site
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+    <h1 class="mb-4">
+    {% if search %}
+        Search Results for "{{ query }}"
+    {% else %}
+        All Recipes
+    {% endif %}
+    </h1>
+
+    {% if recipes %}
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
+            {% for recipe in recipes %}
+            <div class="col">
+                <div class="card h-100">
+                    {% if recipe.image %}
+                        <a href="{% url 'recipe_detail' recipe.id %}">
+                            <img src="{{ recipe.image }}" class="card-img-top img-fluid" alt="{{ recipe.title }}" style="height: 200px; object-fit: cover;">
+                        </a>
+                    {% endif %}
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <a href="{% url 'recipe_detail' recipe.id %}" class="text-decoration-none">{{ recipe.title }}</a>
+                        </h5>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        
+        <div class="mt-4">
+            {% include 'hello/pagination.html' with page=recipes %}
+        </div>
+    {% else %}
+        <p>No recipes found{% if search %} matching your query{% endif %}.</p>
+    {% endif %}
+{% endblock %}

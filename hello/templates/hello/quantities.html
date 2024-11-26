@@ -1,0 +1,39 @@
+{% extends 'hello/base.html' %}
+
+{% block title %}{{ recipe.title }} - My Recipe Site{% endblock %}
+
+{% block content %}
+
+<h2>QTY</h2>
+{% if qty %}
+    <ol>
+        {% for qt in qty %}
+            <li>{{ qty }}</li>
+        {% endfor %}
+    </ol>
+{% else %}
+    <p>No instructions list found.</p>
+{% endif %}
+
+<h2>Unit</h2>
+{% if unit %}
+    <ul>
+        {% for uni in unit %}
+            <li>{{ unit }}</li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No equipment information available.</p>
+{% endif %}
+
+<h2>Measurement</h2>
+{% if metric_measurement %}
+    <ul>
+        {% for metric in metric_measurement %}
+            <li>{{ metric_measurement }}</li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No equipment information available.</p>
+{% endif %}
+</div>

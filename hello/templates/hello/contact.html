@@ -1,0 +1,37 @@
+{% extends 'hello/base.html' %}
+
+{% block title %}Contact Us - My Recipe Site{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1 class="mb-4">Contact Us</h1>
+    <div class="row">
+        <div class="col-md-6">
+            <p>We'd love to hear from you! Whether you have a question about a recipe, want to suggest a new feature, or just want to say hello, feel free to reach out to us.</p>
+            <h2 class="mt-4">Get in Touch</h2>
+            <ul class="list-unstyled">
+                <li><i class="fas fa-envelope me-2"></i> Email: info@myrecipesite.com</li>
+                <li><i class="fas fa-phone me-2"></i> Phone: (123) 456-7890</li>
+                <li><i class="fas fa-map-marker-alt me-2"></i> Address: 123 Culinary Street, Foodville, FK 12345</li>
+            </ul>
+        </div>
+        <div class="col-md-6">
+            <form>
+                <div class="mb-3">
+                    <label for="name" class="form-label">Name</label>
+                    <input type="text" class="form-control" id="name" required>
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="email" required>
+                </div>
+                <div class="mb-3">
+                    <label for="message" class="form-label">Message</label>
+                    <textarea class="form-control" id="message" rows="5" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Send Message</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
